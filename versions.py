@@ -36,6 +36,8 @@ A11/
 Literature
 ----------
 [1] Shepherd, T. D., and Garrett-Roe, S., J. Chem. Educ. (submitted). 
+
+Copyright (C) 2023 Tricia D. Shepherd, Sean Garrett-Roe
 """
 import subprocess, os
 import random

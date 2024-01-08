@@ -1,3 +1,4 @@
+# Copyright (C) 2023 Tricia D. Shepherd, Sean Garrett-Roe
 import sys
 import os
 from random import uniform
@@ -14,14 +15,23 @@ import string
 from string import Template 
 
 def eatOnes(innum):
-    '''Turn input number inum into a string; make the string empty if innum==1. This helps for typesetting of chemical formulas and equations, in which the number 1 is not used explicitly.'''
+    '''Process a string to eliminate 1's according to chemistry convention.
+
+    Turn input number inum into a string; make the string empty if innum==1. 
+    This helps for typesetting of chemical formulas and equations, in which
+    the number 1 is not used explicitly.
+    '''
     outstr = ''
     if innum!=1:
         outstr = str(innum)
     return outstr
 
 def roundToNSigFigs(x,n=3):
-    '''Round an input number x to n significant figures. This should help computed answers align better with student answers when numbers are presented at a certain level of significance.''' 
+    '''Round an input number x to n significant figures. 
+
+    This function should help computed answers align better with student 
+    answers when numbers are presented at a certain level of significance.
+    ''' 
     return x if x == 0 else round(x, -int(np.floor(np.log10(abs(x)))) + (n - 1))
 
 
