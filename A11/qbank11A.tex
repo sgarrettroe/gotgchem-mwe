@@ -1,0 +1,63 @@
+%%A1 Solve problems with multiple correct approaches involving average mass, numbers of atoms, or moles of an element
+
+\titledquestion{TJHQ2204}    %%%SLO:zukurc
+% Note: question based on Spencer - Chapter 1 problem 92
+
+\begin{pycode}
+template_string = r'''
+
+\sisetup{round-mode=figures,round-precision=5}
+
+A new scale of atomic mass was defined based on the assumption 
+that the mass of @myisotope (@exactisotopeMass in our units) is exactly 
+@myisotopeMass. What would be the atomic mass of @element? Explain 
+whether or not your answer seems reasonable. 
+\answerline[@theanswer] 
+
+
+\begin{solution}
+Students should expect their answer to be greater/less than the normal 
+atomic mass based on how the new mass for @myisotope{} compares to the 
+original atomic mass. Relative mass scale -- shifts by ratio: 
+\[@myisotopeMass\,\frac{@atwomass}{@aonemass}=@theanswer\]
+\end{solution}
+  
+'''
+atomone = []
+while atomone == []: 
+    atomone = randrange(1,18)
+    # get rid of carbon, too easy
+    if atomone == 12:
+        atomone = []
+g = pt.elements[atomone]
+
+# pick a random but not insane isotope
+abundance = 0
+while abundance==0:
+    iso = choice(g.isotopes)
+    exactisotopeMass = g[iso].mass
+    massnumber = iso
+    abundance = g[iso].abundance
+
+mass = randint(1,20)
+while mass == massnumber:
+    mass = randint(1,20)
+isotope = '\ce{^{' + str(massnumber) + '}' + g.symbol + '}'
+atomnum = randrange(1,37)
+while atomnum == atomone:
+    atomnum = randrange(1,37)
+g2 = pt.elements[atomnum]
+soln = mass/exactisotopeMass*g2.mass
+
+d = {'theanswer': '\SI{'+str(soln)+'}{amu}',
+  'aonemass':'\SI{'+str(g.mass)+'}{amu}',
+  'atwomass':'\SI{'+str(g2.mass)+'}{amu}',
+  'myisotopeMass':'\SI{'+str(mass)+'}{amu}',
+  'myisotope':isotope,
+  'element':g2.name,
+  'exactisotopeMass':'\SI{'+str(exactisotopeMass)+'}{amu}',
+      }
+print(myTemplate(template_string).safe_substitute(d))
+\end{pycode}
+\vspace{\stretch{1}}
+

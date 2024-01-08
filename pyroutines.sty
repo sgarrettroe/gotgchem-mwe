@@ -1,0 +1,14 @@
+\begin{pycode}
+import sys
+import os
+import logging
+
+try:
+    from pyroutines import *
+except ImportError:        
+    logging.info('Module pyroutines.py not found. Adding parent dir to path')
+    sys.path.append("../")
+    from pyroutines import *
+
+
+\end{pycode}

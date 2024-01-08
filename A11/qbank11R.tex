@@ -1,0 +1,223 @@
+%%% R1 Identify information about an atom (any isotope or ion) related to the number of protons, neutrons, electrons, mass number, atomic number, and the overall charge
+
+\titledquestion{RCLK7981} %%%SLO:eylsza
+
+\begin{pycode}
+
+def AtomicInfo1():
+	g = pt.elements[randrange(4,37)]
+	maxabundance = 0
+	for i in range(len(g.isotopes)):
+		if g[g.isotopes[i]].abundance > maxabundance:
+			iso = i
+			maxabundance = g[g.isotopes[i]].abundance
+	massnumber = g.isotopes[iso]
+	protons = g.number
+	neutrons = g.isotopes[iso]-protons
+	charge = 0
+	while charge == 0:
+		charge = randrange(-3,4)
+	electrons = protons - charge
+	if charge > 0:
+		charge = str(charge)+'+'
+	else: 
+		charge = str(charge)
+	thereturnstring = '\\renewcommand{\\massnumber}{'+str(massnumber)+'} \
+	\\renewcommand{\\protons}{'+str(protons)+'} \
+	\\renewcommand{\\neutrons}{'+str(neutrons)+'} \
+	\\renewcommand{\\electrons}{'+str(electrons)+'} \
+	\\renewcommand{\\name}{'+g.name+'} \
+	\\renewcommand{\\charge}{'+charge+'}'
+	return thereturnstring
+
+\end{pycode}
+
+\providecommand{\massnumber}{init}
+\providecommand{\protons}{init}
+\providecommand{\neutrons}{init}
+\providecommand{\electrons}{init} 
+\providecommand{\charge}{init}
+\providecommand{\name}{init}
+
+\py{AtomicInfo1()}
+
+The most common isotope of \name{} has \neutrons{} neutrons. For the \charge{} ion of this isotope, identify each of the following: 
+
+\begin{parts}
+
+  \part the atomic number: \fillin[\protons]
+   
+  \part the mass number: \fillin[\massnumber]
+  
+  \part the number of electrons: \fillin[\electrons]
+
+\end{parts}
+
+\vspace{\stretch{1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\titledquestion{YCQC4381} %%%SLO:eylsza
+
+\begin{pycode}
+
+def AtomicInfo3():
+	g = pt.elements[randrange(4,37)]
+	maxabundance = 0
+	for i in range(len(g.isotopes)):
+		if g[g.isotopes[i]].abundance > maxabundance:
+			iso = i
+			maxabundance = g[g.isotopes[i]].abundance
+	massnumber = g.isotopes[iso]
+	protons = g.number
+	neutrons = g.isotopes[iso]-protons
+	charge = randrange(-3,4)
+	electrons = protons - charge
+	while charge == 0:
+		charge = randrange(-3,4)
+	electrons = protons - charge
+	if charge > 0:
+		charge = '+'+str(charge)
+	elif charge < 0:  
+		charge = str(charge)
+		
+	thereturnstring = '\\renewcommand{\\massnumber}{'+str(massnumber)+'} \
+	\\renewcommand{\\protons}{'+str(protons)+'} \
+	\\renewcommand{\\neutrons}{'+str(neutrons)+'} \
+	\\renewcommand{\\electrons}{'+str(electrons)+'} \
+	\\renewcommand{\\name}{'+g.name+'} \
+	\\renewcommand{\\mycharge}{'+charge+'}'
+	return thereturnstring
+
+\end{pycode}
+
+\providecommand{\massnumber}{init}
+\providecommand{\protons}{init}
+\providecommand{\neutrons}{init}
+\providecommand{\electrons}{init} 
+\providecommand{\mycharge}{init}
+\providecommand{\name}{init}
+
+\py{AtomicInfo3()}
+
+Identify the following for an isotope of \name{} with a mass number of \massnumber{} and \electrons{} electrons. 
+ 
+
+\begin{parts}
+
+  \part the number of protons: \fillin[\protons]
+   
+  \part the number of neutrons: \fillin[\neutrons]
+  
+  \part the charge: \fillin[\mycharge]
+
+\end{parts}
+
+\begin{solution}
+  \ifgradingnotes
+ Grading Note: Minor error only if clear math error (e.g., $52 - 24 = 22$). The sign of the charge must be correct.  
+\fi
+\end{solution}
+
+
+\vspace{\stretch{0}}
+
+
+%%%%%% R2 Convert between number of atoms, grams, and moles of an element
+
+
+\titledquestion{SITM4673} %%%SLO:ejscop
+
+\begin{pycode}
+
+def AtomMass():
+	atom = pt.elements[randrange(1,37)]
+	num = uniform(1, 10)
+	soln = num*1E21/N_A*atom.mass
+	thereturnstring = '\\renewcommand{\\theanswer}{\\num[round-mode=figures,round-precision=3]{'+str(soln)+'}}  \
+	\\renewcommand{\\atom}{'+atom.name+'} \
+		\\renewcommand{\\atomicmass}{\\num[round-mode=figures,round-precision=4]{'+str(atom.mass)+'}}\
+	\\renewcommand{\\mynum}{\\num[round-mode=figures,round-precision=3]{'+str(num)+'}}'
+	return thereturnstring
+
+\end{pycode}
+
+\providecommand{\theanswer}{init}
+\providecommand{\atom}{init}
+\providecommand{\atomicmass}{init}
+\providecommand{\mynum}{init} 
+
+\py{AtomMass()}
+
+What is the mass in grams of \mynum$\times 10^{21}$ \atom{} atoms? \answerline[\theanswer{} g]
+
+\begin{solution}
+\[
+  \frac{\mynum\times 10^{21} \,\cancel{\text{atoms}}}{1}\,
+   \frac{1\,\cancel{\text{mol}}}{6.02\times 10^{23}\,\cancel{\text{atoms}}}\,
+    \frac{\atomicmass\,\text{g}}{1\,\cancel{\text{mol}}}=\theanswer\,\text{g}
+\]
+
+\vspace{2\baselineskip}
+  \ifgradingnotes
+ Grading Note: Answer is proficient, if the work shown is correct. 
+\fi
+\end{solution}
+
+\vspace{\stretch{0.5}}
+
+
+%% R3 Calculate the average atomic mass of an element given its isotopes and their natural abundance
+
+\titledquestion{RQPY1410} %%%SLO:qyechg
+
+\begin{pycode}
+
+def AvgMass():
+	isolist = [3, 5, 29, 31, 35, 37, 47, 49, 51, 63, 71, 75, 77]
+	nel = randrange(len(isolist))
+	g = pt.elements[isolist[nel]]
+	k = 0
+	mass = []
+	abundance =[]
+	avg = 0
+	for i in range(len(g.isotopes)):
+		if g[g.isotopes[i]].abundance > 0:
+			mass.append(g[g.isotopes[i]].mass)
+			abundance.append(g[g.isotopes[i]].abundance)
+			avg = avg + g[g.isotopes[i]].mass*g[g.isotopes[i]].abundance/100
+	thereturnstring = '\\renewcommand{\\theanswer}{\\num[round-mode=figures,round-precision=4]{'+str(avg)+'}}  \
+	\\renewcommand{\\massone}{\\num[round-mode=figures,round-precision=4]{'+str(mass[0])+'}}  \
+	\\renewcommand{\\masstwo}{\\num[round-mode=figures,round-precision=4]{'+str(mass[1])+'}}  \
+	\\renewcommand{\\abundanceone}{\\num[round-mode=figures,round-precision=3]{'+str(abundance[0])+'}}  \
+		\\renewcommand{\\abundancetwo}{\\num[round-mode=figures,round-precision=3]{'+str(100-abundance[0])+'}}  \
+	\\renewcommand{\\name}{'+g.name+'}' 
+	return thereturnstring
+
+\end{pycode}
+
+\providecommand{\theanswer}{init}
+\providecommand{\massone}{init}
+\providecommand{\masstwo}{init}
+\providecommand{\abundanceone}{init}
+\providecommand{\abundancetwo}{init}
+\providecommand{\name}{init}
+
+
+\py{AvgMass()}
+
+An element has two naturally occurring isotopes. Isotope 1 has a mass of \massone{} amu and a relative abundance of \abundanceone{}\%, and isotope 2 has a mass of \masstwo{} amu. Calculate the average atomic mass of this element. \answerline[\theanswer{} amu, \name]
+
+\begin{solution}
+\[
+(\massone\,\text{amu})\left(\frac{\abundanceone}{100}\right)+(\masstwo\,\text{amu})\left(\frac{\abundancetwo}{100}\right)=\theanswer\,\text{amu, \name}
+\]
+
+\vspace{2\baselineskip}
+  \ifgradingnotes
+ Grading Note: Answer is proficient, if the work shown is correct and the two percentages add up to 100\%. 
+ \fi
+\end{solution}
+
+\vspace{\stretch{0.5}}
+

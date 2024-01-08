@@ -1,0 +1,41 @@
+
+\titledquestion{QJXK4884} %%%SLO:meugai
+
+\begin{pycode}
+
+def coins():
+	type = ['penny','nickel','dime','quarter']
+	mycoin = choice(type)
+	if mycoin == 'penny':
+		metals = ['zinc','copper']
+	else:
+		metals = ['nickle','copper']
+	
+	thereturnstring = '\\renewcommand{\\mycoin}{'+mycoin+'} \
+	\\renewcommand{\\mone}{'+metals[0]+'} \
+	\\renewcommand{\\mtwo}{'+metals[1]+'} \
+	\\renewcommand{\\metal}{'+choice(metals)+'}'
+	return thereturnstring
+
+\end{pycode}
+
+\providecommand{\mycoin}{init}
+\providecommand{\mone}{init}
+\providecommand{\mtwo}{init}
+\providecommand{\metal}{init} 
+
+\py{coins()}
+
+A U.S. \mycoin{} is primarily composed of \mone{} and \mtwo{}. Describe how you would determine the ratio of \mone{} to \mtwo{} atoms in a \mycoin{} assuming you know the number of \mone{} atoms. A proficient answer will show an example calculation with reasonable quantities, units, and any additional information used to make this determination.
+
+\begin{solution}
+
+Student Version: Answer solves problem of how to find the number of atoms of one element knowing the number of atoms of another element. 
+
+\ifgradingnotes
+Detailed Solution: Need sample mass. Convert the number of \metal{} atoms to moles and then grams with the atomic mass. Subtract from the sample mass. Convert this mass to number of atoms of the other metal based on the atomic mass and Avogadro's number. 
+\fi
+\end{solution}
+
+\vspace{\stretch{1}}
+

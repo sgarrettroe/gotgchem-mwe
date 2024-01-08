@@ -1,0 +1,92 @@
+%%% C1 Write or interpret nuclide symbols to represent an element, ion, or isotope
+
+\titledquestion{XOIQ4653} %%%SLO:xzenop
+
+\begin{pycode}
+
+template_string = r'''
+
+Write the nuclide symbols of two isotopes of a @num ion with @electrons electrons.
+
+\begin{solution}
+\ce{^x@ion} and \ce{^y@ion} - where $x\neq y$ and both numbers are greater than @protons.
+
+\vspace{2\baselineskip}
+\end{solution}
+'''
+
+g = pt.elements[randrange(4,37)]
+protons = g.number
+charge = 0
+while charge == 0:
+	charge = randrange(-3,4)
+electrons = protons - charge
+if charge > 0:
+	charge = eatOnes(charge)
+	charge = '+'+charge
+elif charge < 0: 
+	charge = eatOnes(charge)
+	num = charge
+	
+if charge == '+':
+	num = '+1'
+else:
+	num = charge
+
+ion = ionform(str(g.symbol)+charge)
+
+print(myTemplate(template_string).safe_substitute(locals()))
+
+	
+\end{pycode}
+
+
+\vspace{\stretch{0.2}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\titledquestion{GVEQ8268} %%%SLO:xzenop
+
+\begin{pycode}
+
+template_string = r'''
+Make a drawing (and brief explanation if desired) that clearly illustrates what is represented by the following symbol: \ce{^{@massnumber}@ion}
+
+\begin{solution}
+Drawing with @protons protons and @neutrons neutrons in the nucleus and @electrons electrons outside nucleus. (Like CA1 Model 1) 
+
+\vspace{2\baselineskip}
+\ifgradingnotes
+Grading Note: A proficient answer must represent protons, neutrons, and electrons as particles (Not as letters or element symbol). Proton and neutron particles should be in the center (nucleus) and electrons should be outside spaced apart (ignore any shell designation). Must have correct number of protons and electrons. Minor error if number of neutrons is incorrect. 
+\fi
+\end{solution}
+
+'''
+
+g = pt.elements[randrange(1,4)]
+maxabundance = 0
+for i in range(len(g.isotopes)):
+	if g[g.isotopes[i]].abundance > maxabundance:
+		iso = i
+		maxabundance = g[g.isotopes[i]].abundance
+massnumber = g.isotopes[iso]
+protons = g.number
+neutrons = g.isotopes[iso]-protons
+charge = 0
+while charge == 0:
+	charge = randrange(-3,protons)
+electrons = protons - charge
+if charge > 0:
+	charge = eatOnes(charge)
+	charge = '+'+charge
+elif charge < 0: 
+	charge = eatOnes(charge)
+
+ion = ionform(str(g.symbol)+charge)
+
+print(myTemplate(template_string).safe_substitute(locals()))
+	
+\end{pycode}
+
+\vspace{\stretch{0.5}}
+

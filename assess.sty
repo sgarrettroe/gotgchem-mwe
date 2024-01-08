@@ -1,0 +1,20 @@
+\usepackage{siunitx}
+\usepackage{pythontex}
+\usepackage[version=4]{mhchem}
+\usepackage{ulem}
+\usepackage{cancel}
+\usepackage{graphicx}
+
+\extraheadheight{1cm}
+
+\qformat{\thequestion. \parbox[t][5pt]{\linewidth}{(\thequestiontitle)}}
+
+\renewcommand\questionlabel{Answer:}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\setlength\answerlinelength{2in}
+\extrawidth{0.5in}
+
+\newif\ifgradingnotes
+\gradingnotesfalse
+
