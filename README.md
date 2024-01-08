@@ -1,18 +1,17 @@
-Minimal Working Example of the Codebase to Create Growth-Oriented Assessments for General Chemistry
-===
+# Minimal Working Example of the Codebase to Create Growth-Oriented Assessments for General Chemistry
 
 The content of this repository is explained in
 
 Shepherd, T.D., and Garrett-Roe, S., Low-Stakes, Growth-oriented Testing in General Chemistry 1, J. Chem. Educ. (submitted). 
 
-The infrastructure used to create the assessments was based on open-source \LaTeX packages exam and pythontex, which are available through the Comprehensive \TeX Archive Network, CTAN -- \url{https://ctan.org}. CTAN provides ready-to-run \TeX systems for various platforms. 
+The infrastructure used to create the assessments was based on open-source \LaTeX packages exam and pythontex, which are available through the Comprehensive TeX Archive Network, CTAN -- https://ctan.org. CTAN provides ready-to-run TeX systems for various platforms. 
 
 In this github repository, we have example code for selected questions from Knowledge Focus 1.1. These files serve as an minimal example of the code used to generate multiple versions of an assessment from a few general question stems. 
 
-- Install LaTeX (\url{https://www.latex-project.org/get/})
-- Install python $>3.9$.  (\url{https://www.anaconda.com/products/individual#Downloads})
-- Install periodictable (\url{https://pypi.org/project/periodictable/})
-- Install chempy (\url{https://pythonhosted.org/chempy/#installation})
+- Install LaTeX (https://www.latex-project.org/get/)
+- Install python $>3.9$.  (https://www.anaconda.com/products/individual#Downloads)
+- Install periodictable (https://pypi.org/project/periodictable/)
+- Install chempy (https://pythonhosted.org/chempy/#installation)
 
 To test the installation, at a command prompt:
 ```bash
